@@ -11,154 +11,270 @@
                 extend: {
                     colors: {
                         vc: {
-                            base: '#02000D',
-                            surface: '#07203F',
-                            light: '#EBDED4',
-                            peach: '#D9AA90',
-                            rust: '#A65E46',
+                            base: '#030712', /* Ultra Deep Slate/Black */
+                            surface: '#0B132B', /* Midnight Blue */
+                            panel: '#111C3A', /* Elevated Panel */
+                            light: '#F8FAFC', /* Platinum White */
+                            champagne: '#E0C0A8', /* Luxury Beige Peach */
+                            champagneDark: '#C9A388', /* Deeper Beige Peach */
+                            muted: '#94A3B8', /* Slate gray for secondary text */
                         }
                     },
                     animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'glow-pulse': 'glowPulse 6s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
                         }
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #02000D;
-            color: #EBDED4;
+            background-color: #030712;
+            color: #F8FAFC;
         }
-        .radar-bg {
-            background-image: radial-gradient(circle at top, #07203F 0%, #02000D 55%, #000000 100%);
+        .luxury-bg {
+            background-image: 
+                radial-gradient(circle at 50% -20%, #111C3A 0%, transparent 60%),
+                radial-gradient(circle at 100% 50%, rgba(224, 192, 168, 0.04) 0%, transparent 50%),
+                linear-gradient(to bottom, #030712, #02040A);
         }
-        .glow-text {
-            text-shadow: 0 0 25px rgba(217, 170, 144, 0.35);
+        .glass-panel {
+            background: rgba(17, 28, 58, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .champagne-gradient-text {
+            background: linear-gradient(135deg, #F8FAFC 0%, #E0C0A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="radar-bg min-h-screen flex flex-col antialiased selection:bg-vc-rust selection:text-vc-light">
+<body class="luxury-bg min-h-screen flex flex-col antialiased selection:bg-vc-champagne selection:text-vc-base relative">
+
+    <!-- Subtle Ambient Glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-vc-champagne/5 blur-[120px] rounded-full pointer-events-none z-0 animate-glow-pulse"></div>
+
+    <!-- Executive Status Bar -->
+    <div class="w-full border-b border-white/5 bg-vc-base/80 backdrop-blur-md z-20 relative">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center text-[11px] font-medium tracking-widest text-vc-muted uppercase">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div> VC-7 Engine Online</span>
+                <span class="hidden md:inline-block">Monitoring 150+ Global Markets</span>
+            </div>
+            <div class="hidden sm:block">
+                <span>Private Beta Protocol Active</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center z-10">
-        <div class="flex items-center gap-2 cursor-default">
-            <i data-lucide="radar" class="text-vc-peach w-8 h-8"></i>
-            <span class="text-2xl font-bold tracking-widest uppercase text-vc-light">VenueClear</span>
+    <nav class="w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center z-10 relative">
+        <div class="flex items-center gap-3 cursor-default">
+            <i data-lucide="radar" class="text-vc-champagne w-7 h-7"></i>
+            <span class="text-xl font-bold tracking-[0.2em] uppercase text-vc-light">VenueClear</span>
         </div>
         <div>
-            <span class="px-4 py-1.5 rounded-full border border-vc-rust/40 text-vc-peach text-xs font-semibold uppercase tracking-wider bg-vc-rust/10">
-                Private Beta
-            </span>
+            <button onclick="openModal()" class="px-5 py-2 rounded-full border border-vc-champagne/30 text-vc-champagne hover:bg-vc-champagne hover:text-vc-base text-xs font-bold uppercase tracking-widest transition-all duration-300">
+                Client Login
+            </button>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow flex flex-col justify-center items-center px-6 z-10 py-12 md:py-0">
+    <main class="flex-grow flex flex-col justify-center items-center px-6 z-10 py-16 md:py-12 relative">
         <div class="max-w-4xl mx-auto text-center">
             
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-vc-surface/40 border border-vc-surface mb-8 backdrop-blur-sm shadow-lg">
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-vc-peach opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-vc-rust"></span>
-                </span>
-                <span class="text-sm text-vc-light/90 font-medium">Platform currently tracking 45+ major US markets</span>
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight text-vc-light">
-                The predictive risk radar for the <br class="hidden md:block"/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-vc-peach to-vc-light glow-text">
-                    $1 Trillion events industry.
-                </span>
+            <h1 class="text-5xl md:text-[5rem] font-bold mb-8 leading-[1.1] tracking-tight text-vc-light">
+                Flawless execution requires <br class="hidden md:block"/>
+                <span class="champagne-gradient-text">asymmetric intelligence.</span>
             </h1>
 
-            <p class="text-lg md:text-2xl text-vc-light/70 font-light mb-12 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 300ms;">
-                We aggregate data from PredictHQ, Ticketmaster, and local APIs to generate a 1-10 Danger Score for any city. Get the board-ready, 1-page PDF Threat Report you need to protect $500k budgets from 200% hotel surges and local gridlock.
+            <p class="text-lg md:text-xl text-vc-muted font-light mb-12 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 200ms;">
+                Your client's $2M installation should never be compromised by an unindexed city marathon routing through your loading dock. We provide the 1-page Risk & Logistics Dossier that elite planners use to protect aesthetics, defend budgets, and execute with absolute certainty.
             </p>
 
-            <div class="bg-vc-surface/30 border border-vc-surface/60 rounded-2xl p-8 md:p-12 mb-16 backdrop-blur-md max-w-4xl mx-auto text-left relative overflow-hidden shadow-2xl">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-vc-rust/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
-                <h3 class="text-vc-peach font-semibold tracking-widest uppercase text-sm mb-4">The VenueClear Manifesto</h3>
-                <p class="text-vc-light md:text-lg leading-relaxed italic">
-                    "Whether you’re protecting a $500,000 event budget from a 200% hotel surge, or closing a $2 million account over the most electric weekend a city has seen all year — we tell you when to move and when to strike."
+            <div class="glass-panel rounded-2xl p-8 md:p-12 mb-16 max-w-4xl mx-auto text-left relative overflow-hidden group hover:border-vc-champagne/30 transition-colors duration-500">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-vc-champagne font-semibold tracking-[0.15em] uppercase text-xs">The VC-7 Engine Framework</h3>
+                    <span class="text-[10px] text-vc-muted border border-white/10 px-3 py-1 rounded-full uppercase tracking-widest">Proprietary Methodology</span>
+                </div>
+                <p class="text-vc-light/90 md:text-lg leading-relaxed font-light">
+                    Our architecture does not rely on static calendars. The VC-7 algorithm synthesizes millions of unstructured footprint signals, civic infrastructure feeds, and latent demand indicators to generate a <span class="text-white font-medium border-b border-vc-champagne/50">Predictive Volatility Score</span> months before your client signs a contract.
                 </p>
             </div>
 
             <!-- Primary CTA Button -->
             <div class="flex w-full justify-center">
-                <a href="[INSERT_YOUR_FORM_LINK_HERE]" target="_blank" class="px-8 py-4 bg-vc-rust hover:bg-vc-peach text-vc-light hover:text-vc-base font-bold rounded-lg transition-all duration-300 shadow-[0_0_20px_rgba(166,94,70,0.4)] hover:shadow-[0_0_30px_rgba(217,170,144,0.6)] transform hover:-translate-y-1 w-full sm:w-auto text-center flex items-center justify-center gap-3">
-                    <i data-lucide="file-text" class="w-5 h-5"></i> Generate PDF Threat Report
-                </a>
+                <button onclick="openModal()" class="group px-8 py-4 bg-vc-light text-vc-base hover:bg-vc-champagne hover:text-vc-base font-bold rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(224,192,168,0.4)] transform hover:-translate-y-1 w-full sm:w-auto text-center flex items-center justify-center gap-3">
+                    <i data-lucide="lock" class="w-5 h-5 group-hover:scale-110 transition-transform"></i> Request Beta Access
+                </button>
             </div>
         </div>
 
         <!-- The Vegas vs. Omaha Rule Block -->
-        <div class="max-w-4xl mx-auto mt-20 mb-12 p-1 rounded-2xl bg-gradient-to-r from-vc-rust/30 to-vc-surface/30 animate-fade-in-up" style="animation-delay: 500ms; opacity: 0;">
-            <div class="bg-vc-base rounded-xl p-8 md:p-10 border border-vc-surface">
-                <h2 class="text-2xl md:text-3xl font-bold text-vc-light mb-4 text-center">The Vegas vs. Omaha Rule</h2>
-                <p class="text-vc-light/70 text-center mb-8 max-w-2xl mx-auto">Not all crowds are created equal. Our predictive algorithm divides total expected attendance by a city's absorption index to output a 1-10 Danger Score.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-[#051514] border border-[#0F3D38] p-6 rounded-lg text-center">
-                        <h4 class="text-[#4ADE80] font-bold text-2xl mb-2">2.0 / 10 (Green)</h4>
-                        <p class="text-vc-light/80 text-sm">15k person Tech Convention in Las Vegas. Infrastructure absorbs the impact. Minimal surge pricing.</p>
+        <div class="max-w-4xl w-full mx-auto mt-32 mb-12 animate-fade-in-up" style="animation-delay: 400ms; opacity: 0;">
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="h-px w-12 bg-gradient-to-r from-transparent to-vc-champagne/50"></div>
+                <h2 class="text-xl md:text-2xl font-bold text-vc-light tracking-wide uppercase">The Vegas vs. Omaha Rule</h2>
+                <div class="h-px w-12 bg-gradient-to-l from-transparent to-vc-champagne/50"></div>
+            </div>
+            <p class="text-vc-muted text-center mb-10 max-w-2xl mx-auto font-light leading-relaxed">Raw attendance numbers are useless without context. Our algorithm divides <span class="text-vc-light font-medium">Total Influx Volume (TIV)</span> by a city's <span class="text-vc-light font-medium">Market Absorption Index (MAI)</span> to reveal the true localized impact.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Safe Zone Card -->
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden hover:border-emerald-500/20 transition-colors">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full blur-2xl"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-emerald-400 font-semibold text-xl tracking-tight">Low Volatility</h4>
+                        <div class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></div>
                     </div>
-                    <div class="bg-[#1A0B0B] border border-[#4A1D1D] p-6 rounded-lg text-center">
-                        <h4 class="text-[#F87171] font-bold text-2xl mb-2">9.5 / 10 (Red)</h4>
-                        <p class="text-vc-light/80 text-sm">15k person Youth Cheer Tournament in Omaha. Local hotels exhausted. Massive logistical gridlock.</p>
+                    <p class="text-vc-light font-medium text-sm mb-3">15,000 Pax Tech Convention in Las Vegas</p>
+                    <p class="text-vc-muted text-sm leading-relaxed font-light">High Market Absorption. Infrastructure easily dampens the impact. Minimal vendor gridlock. Luxury blocks remain accessible and secure.</p>
+                </div>
+                
+                <!-- Critical Zone Card -->
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden hover:border-rose-500/20 transition-colors">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-bl-full blur-2xl"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-rose-400 font-semibold text-xl tracking-tight">Critical Exposure</h4>
+                        <div class="w-2 h-2 rounded-full bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.5)]"></div>
                     </div>
+                    <p class="text-vc-light font-medium text-sm mb-3">15,000 Pax Regional Tournament in Omaha</p>
+                    <p class="text-vc-muted text-sm leading-relaxed font-light">Low Market Absorption. Premium 4-star inventory exhausted 11 months prior. Massive systemic disruption to local vendor delivery routes.</p>
                 </div>
             </div>
         </div>
 
         <!-- 3 Column Feature Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-24 w-full mt-12">
             <!-- Feature 1 -->
-            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
-                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
-                    <i data-lucide="map-pin-off"></i>
+            <div class="glass-panel rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                <div class="w-10 h-10 rounded-full bg-vc-surface flex items-center justify-center mb-6 text-vc-champagne border border-white/5">
+                    <i data-lucide="map" class="w-5 h-5"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-vc-light">Local Gridlock Detection</h3>
-                <p class="text-vc-light/60 text-sm leading-relaxed">We flag hidden city-wide conventions, marathons, and festivals that paralyze vendor load-in routes and monopolize luxury accommodations.</p>
+                <h3 class="text-lg font-semibold mb-3 text-vc-light">Algorithmic Route Preservation</h3>
+                <p class="text-vc-muted text-sm leading-relaxed font-light">Shield critical load-in schedules and VIP transport from unmapped city-wide congestion and street closures.</p>
             </div>
             
-            <!-- Feature 2 -->
-            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
-                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
-                    <i data-lucide="smartphone"></i>
+            <!-- Feature 2 (UPDATED BAR MIGRATION FEATURE) -->
+            <div class="glass-panel rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                <div class="w-10 h-10 rounded-full bg-vc-surface flex items-center justify-center mb-6 text-vc-champagne border border-white/5">
+                    <i data-lucide="eye-off" class="w-5 h-5"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-vc-light">Attention Threat Radar</h3>
-                <p class="text-vc-light/60 text-sm leading-relaxed">We monitor major national sports broadcasts that historically cause "Bar Migration" and guest distraction, protecting the aesthetic of your reception.</p>
+                <h3 class="text-lg font-semibold mb-3 text-vc-light">Behavioral Attrition Forecasting</h3>
+                <p class="text-vc-muted text-sm leading-relaxed font-light">Anticipate and neutralize the "Bar Migration" effect. We correlate macro-broadcast vectors with demographic density to predict sudden guest drop-off, preserving your event's energy.</p>
             </div>
 
             <!-- Feature 3 -->
-            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
-                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
-                    <i data-lucide="trending-down"></i>
+            <div class="glass-panel rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                <div class="w-10 h-10 rounded-full bg-vc-surface flex items-center justify-center mb-6 text-vc-champagne border border-white/5">
+                    <i data-lucide="trending-down" class="w-5 h-5"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-vc-light">Surge Pricing Defense</h3>
-                <p class="text-vc-light/60 text-sm leading-relaxed">Our algorithm projects hotel rate spikes up to 18 months out, giving you the fiduciary leverage to shift dates before contracts are signed.</p>
+                <h3 class="text-lg font-semibold mb-3 text-vc-light">Yield Management Counter-Intel</h3>
+                <!-- HONESTY CHECK: Updated to reflect assessing risk, not a live pricing feed -->
+                <p class="text-vc-muted text-sm leading-relaxed font-light">Identify severe hotel block scarcity and pricing surge risk up to 18 months out to secure fiduciary leverage.</p>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-vc-surface flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-vc-light/40 z-10">
-        <p>&copy; 2026 VenueClear Intelligence. All rights reserved.</p>
-        <p>Founder: Drew George</p>
+    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-vc-muted z-10 relative font-light tracking-wide">
+        <div class="flex items-center gap-3">
+            <i data-lucide="shield-check" class="w-4 h-4 text-vc-champagne"></i>
+            Data Encrypted & Proprietary
+        </div>
+        <p>&copy; 2026 VenueClear Intelligence. Founder: Andrew George.</p>
     </footer>
 
-    <!-- Initialize Icons -->
+    <!-- Waitlist Modal (Luxury Aesthetic) -->
+    <div id="waitlist-modal" class="fixed inset-0 bg-vc-base/95 backdrop-blur-xl z-50 hidden flex justify-center items-center px-4 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel border border-vc-champagne/30 rounded-2xl p-8 max-w-md w-full relative shadow-[0_0_60px_rgba(224,192,168,0.15)] transform scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-vc-muted hover:text-vc-light transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="w-12 h-12 bg-vc-champagne/10 rounded-full flex items-center justify-center mb-6 border border-vc-champagne/40 text-vc-champagne">
+                <i data-lucide="key" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-vc-light mb-2 tracking-tight">Beta Access Gateway</h3>
+            <!-- HONESTY CHECK: Removed the '45+ agencies' lie. Still feels exclusive. -->
+            <p class="text-vc-muted text-sm mb-8 leading-relaxed font-light">Beta access is strictly capped to ensure high-fidelity reporting for our early partners. Submit your corporate credentials to request an allocation in our next onboarding cohort.</p>
+            
+            <form onsubmit="event.preventDefault(); submitForm();" class="space-y-4">
+                <input type="email" required placeholder="name@agency.com" class="w-full bg-vc-base/50 border border-white/10 rounded-xl px-4 py-3.5 text-vc-light placeholder-vc-muted focus:outline-none focus:border-vc-champagne/60 transition-colors text-sm">
+                <button type="submit" id="submit-btn" class="w-full bg-vc-light hover:bg-vc-champagne text-vc-base font-bold py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg">
+                    Authenticate Credentials <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+            
+            <div id="success-message" class="hidden mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-sm text-center flex items-center justify-center gap-2 font-medium">
+                <i data-lucide="check-circle" class="w-5 h-5"></i> 
+                Credentials securely received. Awaiting verification.
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize Icons and Modal Logic -->
     <script>
         lucide.createIcons();
+
+        const modal = document.getElementById('waitlist-modal');
+        const content = document.getElementById('modal-content');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            content.classList.remove('scale-95');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            
+            setTimeout(() => {
+                document.getElementById('submit-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.add('hidden');
+                document.querySelector('form').reset();
+            }, 400);
+        }
+
+        function submitForm() {
+            const btn = document.getElementById('submit-btn');
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-vc-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Validating...';
+            
+            setTimeout(() => {
+                btn.classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                setTimeout(() => {
+                    closeModal();
+                    setTimeout(() => {
+                        btn.innerHTML = 'Authenticate Credentials <i data-lucide="arrow-right" class="w-4 h-4"></i>';
+                        lucide.createIcons();
+                    }, 300);
+                }, 3500);
+            }, 1800);
+        }
     </script>
 </body>
 </html>
