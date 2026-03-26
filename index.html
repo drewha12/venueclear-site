@@ -1,1 +1,164 @@
-index.html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VenueClear | Predictive Logistics for Elite Planners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vc: {
+                            base: '#02000D',
+                            surface: '#07203F',
+                            light: '#EBDED4',
+                            peach: '#D9AA90',
+                            rust: '#A65E46',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #02000D;
+            color: #EBDED4;
+        }
+        .radar-bg {
+            background-image: radial-gradient(circle at top, #07203F 0%, #02000D 55%, #000000 100%);
+        }
+        .glow-text {
+            text-shadow: 0 0 25px rgba(217, 170, 144, 0.35);
+        }
+    </style>
+</head>
+<body class="radar-bg min-h-screen flex flex-col antialiased selection:bg-vc-rust selection:text-vc-light">
+
+    <!-- Navigation -->
+    <nav class="w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center z-10">
+        <div class="flex items-center gap-2 cursor-default">
+            <i data-lucide="radar" class="text-vc-peach w-8 h-8"></i>
+            <span class="text-2xl font-bold tracking-widest uppercase text-vc-light">VenueClear</span>
+        </div>
+        <div>
+            <span class="px-4 py-1.5 rounded-full border border-vc-rust/40 text-vc-peach text-xs font-semibold uppercase tracking-wider bg-vc-rust/10">
+                Private Beta
+            </span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col justify-center items-center px-6 z-10 py-12 md:py-0">
+        <div class="max-w-4xl mx-auto text-center">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-vc-surface/40 border border-vc-surface mb-8 backdrop-blur-sm shadow-lg">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-vc-peach opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-vc-rust"></span>
+                </span>
+                <span class="text-sm text-vc-light/90 font-medium">Platform currently tracking 45+ major US markets</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight text-vc-light">
+                The predictive risk radar for the <br class="hidden md:block"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-vc-peach to-vc-light glow-text">
+                    $1 Trillion events industry.
+                </span>
+            </h1>
+
+            <p class="text-lg md:text-2xl text-vc-light/70 font-light mb-12 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 300ms;">
+                We aggregate data from PredictHQ, Ticketmaster, and local APIs to generate a 1-10 Danger Score for any city. Get the board-ready, 1-page PDF Threat Report you need to protect $500k budgets from 200% hotel surges and local gridlock.
+            </p>
+
+            <div class="bg-vc-surface/30 border border-vc-surface/60 rounded-2xl p-8 md:p-12 mb-16 backdrop-blur-md max-w-4xl mx-auto text-left relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-vc-rust/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+                <h3 class="text-vc-peach font-semibold tracking-widest uppercase text-sm mb-4">The VenueClear Manifesto</h3>
+                <p class="text-vc-light md:text-lg leading-relaxed italic">
+                    "Whether you’re protecting a $500,000 event budget from a 200% hotel surge, or closing a $2 million account over the most electric weekend a city has seen all year — we tell you when to move and when to strike."
+                </p>
+            </div>
+
+            <!-- Primary CTA Button -->
+            <div class="flex w-full justify-center">
+                <a href="[INSERT_YOUR_FORM_LINK_HERE]" target="_blank" class="px-8 py-4 bg-vc-rust hover:bg-vc-peach text-vc-light hover:text-vc-base font-bold rounded-lg transition-all duration-300 shadow-[0_0_20px_rgba(166,94,70,0.4)] hover:shadow-[0_0_30px_rgba(217,170,144,0.6)] transform hover:-translate-y-1 w-full sm:w-auto text-center flex items-center justify-center gap-3">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Generate PDF Threat Report
+                </a>
+            </div>
+        </div>
+
+        <!-- The Vegas vs. Omaha Rule Block -->
+        <div class="max-w-4xl mx-auto mt-20 mb-12 p-1 rounded-2xl bg-gradient-to-r from-vc-rust/30 to-vc-surface/30 animate-fade-in-up" style="animation-delay: 500ms; opacity: 0;">
+            <div class="bg-vc-base rounded-xl p-8 md:p-10 border border-vc-surface">
+                <h2 class="text-2xl md:text-3xl font-bold text-vc-light mb-4 text-center">The Vegas vs. Omaha Rule</h2>
+                <p class="text-vc-light/70 text-center mb-8 max-w-2xl mx-auto">Not all crowds are created equal. Our predictive algorithm divides total expected attendance by a city's absorption index to output a 1-10 Danger Score.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-[#051514] border border-[#0F3D38] p-6 rounded-lg text-center">
+                        <h4 class="text-[#4ADE80] font-bold text-2xl mb-2">2.0 / 10 (Green)</h4>
+                        <p class="text-vc-light/80 text-sm">15k person Tech Convention in Las Vegas. Infrastructure absorbs the impact. Minimal surge pricing.</p>
+                    </div>
+                    <div class="bg-[#1A0B0B] border border-[#4A1D1D] p-6 rounded-lg text-center">
+                        <h4 class="text-[#F87171] font-bold text-2xl mb-2">9.5 / 10 (Red)</h4>
+                        <p class="text-vc-light/80 text-sm">15k person Youth Cheer Tournament in Omaha. Local hotels exhausted. Massive logistical gridlock.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Column Feature Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24">
+            <!-- Feature 1 -->
+            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
+                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
+                    <i data-lucide="map-pin-off"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-vc-light">Local Gridlock Detection</h3>
+                <p class="text-vc-light/60 text-sm leading-relaxed">We flag hidden city-wide conventions, marathons, and festivals that paralyze vendor load-in routes and monopolize luxury accommodations.</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
+                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
+                    <i data-lucide="smartphone"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-vc-light">Attention Threat Radar</h3>
+                <p class="text-vc-light/60 text-sm leading-relaxed">We monitor major national sports broadcasts that historically cause "Bar Migration" and guest distraction, protecting the aesthetic of your reception.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-vc-surface/20 border border-vc-surface/50 rounded-xl p-6 backdrop-blur-sm transition hover:bg-vc-surface/40">
+                <div class="w-12 h-12 bg-vc-surface/80 rounded-lg flex items-center justify-center mb-4 text-vc-peach shadow-inner">
+                    <i data-lucide="trending-down"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-vc-light">Surge Pricing Defense</h3>
+                <p class="text-vc-light/60 text-sm leading-relaxed">Our algorithm projects hotel rate spikes up to 18 months out, giving you the fiduciary leverage to shift dates before contracts are signed.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-vc-surface flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-vc-light/40 z-10">
+        <p>&copy; 2026 VenueClear Intelligence. All rights reserved.</p>
+        <p>Founder: Drew George</p>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
